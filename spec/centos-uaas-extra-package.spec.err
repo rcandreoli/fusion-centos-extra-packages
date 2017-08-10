@@ -1,0 +1,48 @@
+Summary: RPM Centos Extra Packages for Server 
+Name: centos-uaas-extra-package
+Version: %{VERSION} 
+Release: %{RELEASE}
+License: GPL
+Group: Sonae/Fusion
+URL: http://www.tlantic.com/
+Vendor: TLANTIC
+Packager: Rodrigo C. Andreoli
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+Source0: %{name}-%version-%release.tar.gz
+%global _enable_debug_package 0
+%global debug_package %{nil}
+%global __os_install_post /usr/lib/rpm/brp-compress %{nil}
+%define __check_files %{nil}
+
+
+%description
+Pacote RPM Centos Extra Packages for Server 
+
+%prep
+rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT
+tar -zxf %{name}-%{version}-%{release}.tar.gz -C $RPM_BUILD_ROOT/
+
+%install
+export DONT_STRIP=1
+mkdir -p $RPM_BUILD_ROOT/
+#cd %{name}-%{version}-%{release}
+cp -r * $RPM_BUILD_ROOT/
+
+%files 
+%defattr(-,root,root)
+/
+
+%post
+#nothingo to do after install
+rpm -qa |grep %{name}
+echo "RPM: %{name} -  Installation is Finish"
+
+%clean
+rm -rf $RPM_BUILD_DIR
+rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_SOURCE_DIR
+
+%changelog
+* Mon Jul 31 2017 Rodrigo Cezar Andreoli <rodrigoa@tlantic.com>
+- criacao do spec

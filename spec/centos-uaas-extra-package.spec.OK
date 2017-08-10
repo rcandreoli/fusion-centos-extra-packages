@@ -1,0 +1,28 @@
+Summary: RPM de Teste
+Name: centos-uaas-extra-package
+Version: 1.0.0.0
+Release: 1
+License: GPL
+Group: System/Utilities
+URL: http://www.triforsec.com.br/
+Vendor: TLANTIC
+Packager: Rodrigo Andreoli
+BuildRoot: %{_tmppath}/%{name}-%{version}-%release
+Source0: %{name}-%version-%release.tar.gz
+
+%description
+Teste de criação de um pacote RPM
+
+%prep
+rm -rf $RPM_BUILD_DIR/%{name}-%{version}-%{release}
+mkdir -p $RPM_BUILD_DIR/%{name}-%{version}-%{release}
+tar -zxf $RPM_SOURCE_DIR/%{name}-%{version}-%{release}.tar.gz -C $RPM_BUILD_DIR/%{name}-%{version}-%{release}
+
+%install
+rm -rf $RPM_BUILD_ROOT/
+mkdir -p $RPM_BUILD_ROOT/
+cp -r * $RPM_BUILD_ROOT/
+
+%files
+%defattr(-,root,root)
+/
